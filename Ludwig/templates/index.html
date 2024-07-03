@@ -1,0 +1,570 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+
+
+{% block title %} Home {% endblock %}
+
+
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col md-12">
+
+            <div class="jumbotron p-3 bg-secondary">
+
+                <h2>LUDWIG PFEIFFER <b>Entry </b>list  <button type="button"  class="btn btn-primary float-right"
+                data-toggle="modal" data-target="#mymodal">Add New Entry</button> </h2>
+
+
+                {% with messages = get_flashed_messages() %}
+
+                {% if messages %}
+
+                {% for message in messages %}
+
+                <div class="alert alert-success alert-dismissable" role="alert">
+
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+
+                        <span aria-hidden="true">x</span>
+
+                    </button>
+
+
+                {{message}}
+
+
+                </div>
+
+
+                {% endfor %}
+
+                {% endif %}
+                {% endwith %}
+
+
+                <table class="table table-hover table-striped">
+
+                    <tr>
+
+                        <th>ID</th>
+                        <th>SN</th>
+                        <th>Item Code</th>
+                        <th>Description of Items</th>
+                        <th>Quantity</th>
+                        <th>Unit</th>
+                        <th>Work Done</th>
+                        <th>Date</th>
+                        <th>Reporter Name</th>
+                        <th>Scheme ID</th>
+                        <th>Item Status</th>
+                        <th>Location Condition</th>
+                        <th>Weather Condition</th>
+                        <th>Created By</th>
+                        <th>Contractor Name</th>
+                        <th>Modified By</th>
+                        <th>Created</th>
+                        <th> Is Extra?</th>
+
+                    </tr>
+
+
+                   {% for row in entryList %}
+                    <tr>
+                        <td>{{row.id}}</td>
+                        <td>{{row.sn}}</td>
+                        <td>{{row.itemCode}}</td>
+                        <td>{{row.desOfItems}}</td>
+                        <td>{{row.quantity}}</td>
+                        <td>{{row.unit}}</td>
+                        <td>{{row.workDone}}</td>
+                        <td>{{row.date}}</td>
+                        <td>{{row.reporterName}}</td>
+                        <td>{{row.schemeId}}</td>
+                        <td>{{row.itemStatus}}</td>
+                        <td>{{row.locationCondition}}</td>
+                        <td>{{row.weatherCondition}}</td>
+                        <td>{{row.createdBy}}</td>
+                        <td>{{row.contractorName}}</td>
+                        <td>{{row.modifiedBy}}</td>
+                        <td>{{row.created}}</td>
+                        <td>{{row.isExtra}}</td>
+
+                        <td>
+                            <a href="/update/{{row.id}}" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modaledit{{row.id}}">Edit</a>
+                            <a href="/delete/{{row.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete this information ?')">Delete</a>
+
+
+                        </td>
+
+                    </tr>
+
+
+                  <!-- Modal Edit LUDWIG PFEIFFER-->
+<div id="modaledit{{row.id}}" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+
+
+      <div class="modal-content">
+
+
+         <div class="modal-header">
+
+
+            <h4 class="modal-title">Update Information</h4>
+
+
+         </div>
+
+
+         <div class="modal-body">
+
+
+            <form action="{{url_for('update')}}" method="POST">
+
+
+              <div class="form-group">
+
+
+                 <label>ID:</label>
+
+                 <input type="text" class="form-control" name="id" value="{{row.id}}">
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <label>SN:</label>
+
+                  <input type="text" class="form-control" name="sn" value="{{row.sn}}">
+
+                </div>
+
+               <div class="form-group">
+
+                  <label>Item Code:</label>
+
+                  <input type="text" class="form-control" name="itemCode" value="{{row.itemCode}}">
+
+
+               </div>
+ -
+
+
+               <div class="form-group">
+
+
+                  <label>Description of Items:</label>
+
+                  <input type="text" class="form-control" name="email" value="{{row.email}}">
+
+
+               </div>
+
+
+               <div class="form-group">
+
+
+                  <label>Quantity:</label>
+
+                  <input type="number" step="0.02" class="form-control" name="quantity" value="{{row.quantity}}">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <label>Unit:</label>
+
+                  <input type="text" class="form-control" name="unit" value="{{row.unit}}">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <label>Work Done:</label>
+
+                  <input type="number" step="0.03" class="form-control" name="workDone" value="{{row.workDone}}">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <label>Date:</label>
+
+                  <input type="text" class="form-control" name="date" value="{{row.date}}">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <label>Reporter Name:</label>
+
+                  <input type="text" class="form-control" name="reporterName" value="{{row.reporterName}}">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <label>Scheme ID :</label>
+
+                  <input type="text" class="form-control" name="schemeId" value="{{row.schemeId}}">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <label>Item Status:</label>
+
+                  <input type="text" class="form-control" name="itemStatus" value="{{row.itemStatus}}">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <label>Location Condition:</label>
+
+                  <input type="text" class="form-control" name="locationCondition" value="{{row.locationCondition}}">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <label>Weather Condition:</label>
+
+                  <input type="text" class="form-control" name="weatherCondition" value="{{row.weatherCondition}}">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <label>Created By:</label>
+
+                  <input type="text" class="form-control" name="createdBy" value="{{row.createdBy}}">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <label>Contractor Name:</label>
+
+                  <input type="text" class="form-control" name="contractorName" value="{{row.contractorName}}">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <label>Modified By:</label>
+
+                  <input type="text" class="form-control" name="modifiedBy" value="{{row.modifiedBy}}">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <label>Created:</label>
+
+                  <input type="text" class="form-control" name="created" value="{{row.created}}">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <label>Is Extra?:</label>
+
+                  <input type="text" class="form-control" name="isExtra" value="{{row.isExtra}}">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <button class="btn btn-primary" type="submit">Update</button>
+
+
+               </div>
+
+
+            </form>
+
+
+         </div>
+
+
+         <div class="modal-footer">
+
+
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+         </div>
+
+
+      </div>
+
+
+   </div>
+
+</div>
+
+
+                    {% endfor %}
+
+
+                </table>
+
+
+            </div>
+
+
+
+                  <!-- Modal Add LUDWIG PFEIFFER-->
+
+
+<div id="mymodal" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+
+            <h4 class="modal-title">Add Entry</h4>
+         </div>
+         <div class="modal-body">
+
+            <form action="{{url_for('insert')}}" method="POST">
+
+              <div class="form-group">
+
+                 <label>ID:</label>
+                 <input type="text" class="form-control" name="id" required="1">
+
+
+              </div>
+
+               <div class="form-group">
+
+                  <label>SN:</label>
+                  <input type="text" class="form-control" name="sn" required="1">
+
+
+               </div>
+
+               <div class="form-group">
+
+                  <label>Item Code:</label>
+                  <input type="text" class="form-control" name="itemCode" required="1">
+
+
+               </div>
+
+
+                <div class="form-group">
+
+
+                  <label>Description of Items:</label>
+                  <input type="text" class="form-control" name="desOfItems" required="1">
+
+
+               </div>
+
+
+                <div class="form-group">
+
+
+                  <label>Quantity:</label>
+                  <input type="number" class="form-control" name="quantity" required="1">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <label>Unit:</label>
+                  <input type="text" class="form-control" name="unit" required="1">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <label>Work Done:</label>
+                  <input type="number" step="0.02" class="form-control" name="workDone" required="1">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <label>Date:</label>
+                  <input type="text" class="form-control" name="date" required="1">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <label>Reporter Name:</label>
+                  <input type="text" class="form-control" name="reporterName" required="1">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <label>Scheme ID:</label>
+                  <input type="text" class="form-control" name="schemeId" required="1">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <label>Item Status:</label>
+                  <input type="text" class="form-control" name="itemStatus" required="1">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <label>Location Condition:</label>
+                  <input type="text" class="form-control" name="locationCondition" required="1">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <label>Weather Condition:</label>
+                  <input type="text" class="form-control" name="weatherCondition" required="1">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <label>Created By:</label>
+                  <input type="text" class="form-control" name="createdBy" required="1">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <label>Contractor Name:</label>
+                  <input type="text" class="form-control" name="contractorName" required="1">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <label>Modified By:</label>
+                  <input type="text" class="form-control" name="modifiedBy" required="1">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <label>Created:</label>
+                  <input type="text" class="form-control" name="created" required="1">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <label>Is Extra:?</label>
+                  <input type="text" class="form-control" name="isExtra" required="1">
+
+
+               </div>
+
+               <div class="form-group">
+
+
+                  <button class="btn btn-primary" type="submit">Add Entry</button>
+
+
+               </div>
+
+
+            </form>
+
+
+         </div>
+
+
+         <div class="modal-footer">
+
+
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+         </div>
+
+
+      </div>
+
+
+   </div>
+
+
+</div>
+
+
+
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}

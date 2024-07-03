@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html >
+<head>
+<meta charset="UTF-8">
+<title>Excel Data push</title>
+<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+<div class="login">
+<h5>Dushanbe Entry</h5>
+
+
+  <form action="{{ url_for('submit')}}"method="post">
+      <input type="text" name="Item_Serial_No" placeholder="Item Serial No" required="required" />
+    <input type="text" name="Name_of_work_including_materials" placeholder="Name of work including materials" required="required" />
+    <select name="Units" required="required">
+        <option value="" disabled selected>Units</option>
+        <option value="m">m</option>
+        <option value="kits">kits</option>
+        <option value="nr">nr</option>
+        <option value="m2">m2</option>
+        <option value="m3">m3</option>
+        <option value="t">t</option>
+        <option value="sum">sum</option>
+      </select>
+  <input type="text" name="Quantity" placeholder="Quantity" required="required" />
+  <input type="date" data-date="" data-date-format="DD/MM/YYYY" value="2021-02-09" name="Date" required="required" />
+  <select name="Work_Done" required="required">
+      <option value="" disabled selected>Work Done</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+
+      <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
+  </form>
+ <br>
+ <br>
+ {{ Data }}
+
+</div>
+
+
+</body>
+</html>
